@@ -15,20 +15,6 @@ pymysql.install_as_MySQLdb()
 import os
 import datetime
 
-# CELERY 
-import djcelery
-from celery import Celery, platforms
-platforms.C_FORCE_ROOT = True
-djcelery.setup_loader()
-BROKER_URL = 'redis://127.0.0.1:6379/0'  # redis broker
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'  # redis backend
-
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'America/Los_Angeles'
-CELERY_ENABLE_UTC = True
-CELERY_IMPORTS = ("sqlmng.tasks",)
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,24 +36,20 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-# restful framework paganation
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (  # 支持验证方式 token，session，basic
-        #'django-sso.auth.Authentication',  # django-sso 方式1
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     )
 }
 
-# 认证后端列表
 AUTHENTICATION_BACKENDS = (
     'rest_framework.authentication.TokenAuthentication',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-# jwt setting
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
     'rest_framework_jwt.utils.jwt_encode_handler',
@@ -127,15 +109,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'django-sso.auth.AuthMiddleware',  # django-sso 方式2
 ]
 
 ROOT_URLCONF = 'django-sso.urls'
 
-# 跨域设置
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
@@ -184,7 +163,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django-sso.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -230,7 +208,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
