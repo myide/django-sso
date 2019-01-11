@@ -269,7 +269,7 @@ LOGGING = {
         'default': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "see.info.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "django-sso.info.log"),
             'maxBytes': 1024 * 1024 * 50,
             'backupCount': 3,
             'formatter': 'standard',
@@ -278,7 +278,7 @@ LOGGING = {
         'error': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "see.error.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "django-sso.error.log"),
             'maxBytes': 1024 * 1024 * 50,
             'backupCount': 5,
             'formatter': 'standard',
@@ -287,7 +287,7 @@ LOGGING = {
         'collect': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "see.collect.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "django-sso.collect.log"),
             'maxBytes': 1024 * 1024 * 50,
             'backupCount': 5,
             'formatter': 'collect',
