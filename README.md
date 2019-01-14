@@ -1,7 +1,7 @@
 
 # 基于django的单点登录系统
 
-![image](https://github.com/myide/django-sso/blob/master/media/ssostruct.jpg)
+![image](https://github.com/myide/django-sso/blob/master/media/imgs/ssostruct.jpg)
 
 ## 实现机制
   当用户第一次访问应用系统1的时候，因为还没有登录，会被引导到认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－ticket；用户再访问别的应用的时候就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了。
