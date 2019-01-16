@@ -44,7 +44,7 @@
     ```
 
 - 各系统前端
-    - 设置用户的登录地址 'http://www.django-sso.com/api/account/login/'
+    - 设置用户的登录地址 'http://www.django-sso.com:8090/api/account/login/'
     - 获取登录地址的token并保存，对访问子系统的请求头加入 {'Authorization': 'JWT ' + token值}
 
 ## 交流学习
