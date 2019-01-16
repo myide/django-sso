@@ -214,6 +214,8 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+AUTH_URL = 'http://127.0.0.1:8090/api/api-token-auth/'
+
 BASE_LOG_DIR = os.path.join(BASE_DIR, "logs")
 
 LOGGING = {
