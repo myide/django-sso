@@ -31,8 +31,7 @@ class LoginView(UnitaryAuth, APIView):
     permission_classes = ()
 
     def post(self, request, *args, **kwargs):
-        if not self.authenticate:
-            raise AuthenticationFailed
+        auth = self.authenticate
         user_query = self.serializer_class.Meta.model.objects.filter(username=request.data.get('username'))
         if user_query:
             serializer = self.serializer_class(user_query[0], data=request.data)
@@ -40,4 +39,4 @@ class LoginView(UnitaryAuth, APIView):
             serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response(auth)

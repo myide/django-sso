@@ -29,6 +29,5 @@ urlpatterns = [
     path('api/docs/', schema_view),
     path('api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/api-token-auth/', obtain_jwt_token),
-    path('api/api-token-verify/', verify_jwt_token),
     path('api/account/', include('account.urls')),
 ]

@@ -1,23 +1,30 @@
 import requests
+from rest_framework.exceptions import AuthenticationFailed
 
 class UnitaryAuth(object):
 
-    @property
-    def authenticate(self):
+    def check_sso(self, param):
         '''
-            1. 请求认证接口, 入参：需要根据接口的定义, 一般是 用户名(username), 密码(password)
-            2. 接口认证成功，本方法返回True， 失败返回False
+            调sso认证后端，把用户和密码数据param作为参数; 返回True或False
+            :param param:
             :return: True/False
         '''
-        data = self.request.data
+        return True
 
-        '''
-            请求认证接口, 示例如下:
-        '''
-        auth_data = {
+    def check_auth(self, param):
+        url ='http://127.0.0.1:8090/api/api-token-auth/'
+        res = requests.post(url, json=param)
+        if not res.ok:
+            raise AuthenticationFailed(res.content)
+        return res.json()
+
+    @property
+    def authenticate(self):
+        data = self.request.data
+        param = {
             'username':data.get('username'),
             'password':data.get('password')
         }
-        url ='http://127.0.0.1:8090/api/api-token-auth/'
-        res = requests.post(url, json=auth_data)
-        return True if res.ok else False
+        if not self.check_sso(param):
+            raise AuthenticationFailed
+        return self.check_auth(param)
