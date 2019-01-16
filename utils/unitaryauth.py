@@ -1,4 +1,5 @@
 import requests
+from django.conf import settings
 from rest_framework.exceptions import AuthenticationFailed
 
 class UnitaryAuth(object):
@@ -12,7 +13,7 @@ class UnitaryAuth(object):
         return True
 
     def check_auth(self, param):
-        url ='http://127.0.0.1:8090/api/api-token-auth/'
+        url = settings.AUTH_URL
         res = requests.post(url, json=param)
         if not res.ok:
             raise AuthenticationFailed(res.content)
