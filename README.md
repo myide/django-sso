@@ -27,6 +27,25 @@
 
 ## 使用
 
+- sso服务端: django-sso
+    - 启动服务端，端口8090，假定地址为 www.django-sso.com
+
+- 接入sso的子系统(工程名:projectName):
+    - 从django-sso服务端拷贝文件django-sso/auth.py, 放置在子系统的工程目录下
+
+    - 设置 settings.py
+    ```bash
+        SSO_URL = 'http://www.django-sso.com:8090/api/account/users/'
+        MIDDLEWARE = [
+            ...
+            'projectName.auth.AuthMiddleware',
+            ...
+        ]
+    ```
+
+- 各系统前端
+    - 设置用户的登录地址 'http://www.django-sso.com/api/account/login/'
+    - 获取登录地址的token并保存，对访问子系统的请求头加入 {'Authorization': 'JWT ' + token值}
 
 ## 交流学习
 - QQ群 630791951
