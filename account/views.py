@@ -14,7 +14,7 @@ class UserViewSet(ModelViewSet):
     '''
         用户信息
     '''
-    queryset = User.objects.all().order_by('-id')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     search_fields = ['username']
 
